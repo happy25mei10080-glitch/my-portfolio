@@ -55,6 +55,96 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 } as const;
 
+/* ----------------------------- TYPEWRITER ----------------------------- */
+function Typewriter({
+  words,
+  typingSpeed = 75,
+  deletingSpeed = 40,
+  pause = 1400,
+}: {
+  words: string[];
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pause?: number;
+}) {
+  const [idx, setIdx] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[idx % words.length];
+    if (!deleting && text === current) {
+      const t = setTimeout(() => setDeleting(true), pause);
+      return () => clearTimeout(t);
+    }
+    if (deleting && text === "") {
+      setDeleting(false);
+      setIdx((i) => (i + 1) % words.length);
+      return;
+    }
+    const t = setTimeout(
+      () => {
+        setText((prev) =>
+          deleting ? current.slice(0, prev.length - 1) : current.slice(0, prev.length + 1)
+        );
+      },
+      deleting ? deletingSpeed : typingSpeed
+    );
+    return () => clearTimeout(t);
+  }, [text, deleting, idx, words, typingSpeed, deletingSpeed, pause]);
+
+  return (
+    <span className="inline-flex items-baseline">
+      <span>{text}</span>
+      <span
+        aria-hidden
+        className="ml-1 inline-block h-[0.9em] w-[2px] translate-y-[2px] bg-cyan glow-cyan animate-caret-blink"
+      />
+    </span>
+  );
+}
+
+function TypeOnce({
+  text,
+  className = "",
+  delay = 0,
+  speed = 55,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  speed?: number;
+}) {
+  const [shown, setShown] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const s = setTimeout(() => setStarted(true), delay * 1000);
+    return () => clearTimeout(s);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    if (shown >= text.length) return;
+    const t = setTimeout(() => setShown((n) => n + 1), speed);
+    return () => clearTimeout(t);
+  }, [shown, started, text, speed]);
+
+  const done = shown >= text.length;
+  return (
+    <span className={`relative inline ${className}`}>
+      {text.slice(0, shown)}
+      {!done && (
+        <span
+          aria-hidden
+          className="ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] bg-current animate-caret-blink"
+        />
+      )}
+    </span>
+  );
+}
+
+
 function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
