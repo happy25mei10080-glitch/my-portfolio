@@ -187,16 +187,27 @@ function Hero() {
             Hi, I'm <span className="text-gradient">Happy Chahal</span>.
             <br />
             <span className="text-foreground/85">Engineering Student &</span>{" "}
-            <span className="text-foreground/85">Aspiring Full-Stack Developer.</span>
+            <span className="text-gradient">
+              <Typewriter
+                words={[
+                  "Full-Stack Developer.",
+                  "MERN Stack Builder.",
+                  "DSA Problem Solver.",
+                  "C++ Enthusiast.",
+                ]}
+              />
+            </span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="mt-6 max-w-xl text-base leading-relaxed text-foreground/65 sm:text-lg"
           >
-            Building scalable web solutions while mastering algorithmic logic. Engineering
-            student at Vellore Institute of Technology dedicated to software devlopment.
+            Building <TypeOnce text="scalable web solutions" className="text-cyan font-medium" /> while
+            mastering <TypeOnce text="algorithmic logic" className="text-violet font-medium" delay={1.2} />.
+            Engineering student at Vellore Institute of Technology dedicated to software development.
           </motion.p>
+
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
             <a
