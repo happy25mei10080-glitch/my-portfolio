@@ -60,7 +60,7 @@ function Portfolio() {
   const [copied, setCopied] = useState(false);
   const [checks, setChecks] = useState<Record<string, boolean>>({});
 
-  const email = "happychahal.dev@gmail.com";
+  const email = "happyprince38699@gmail.com";
 
   const copyEmail = async () => {
     try {
