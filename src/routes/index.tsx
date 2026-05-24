@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import happyImg from "@/assets/happy-chahal.png";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio of Happy Chahal — BTech CSE student at VIT Bhopal building MERN stack applications and mastering DSA in C++.",
+          "Portfolio of Happy Chahal — BTech CSE student at Vellore Institute of Technology building MERN stack applications and mastering DSA in C++.",
       },
       { property: "og:title", content: "Happy Chahal — Portfolio" },
       {
@@ -216,18 +217,6 @@ function Hero() {
             </a>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="mt-10 grid max-w-md grid-cols-3 gap-3">
-            {[
-              { k: "CGPA", v: "9.0+" },
-              { k: "Stack", v: "MERN" },
-              { k: "Lang", v: "C++" },
-            ].map((s) => (
-              <div key={s.k} className="glass rounded-xl px-4 py-3">
-                <div className="font-mono text-xs uppercase tracking-wider text-foreground/50">{s.k}</div>
-                <div className="mt-1 font-mono text-lg text-foreground">{s.v}</div>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* Right: Orbital graphic */}
@@ -278,9 +267,14 @@ function OrbitalGraphic() {
       <div className="absolute inset-[30%] rounded-full border border-white/10 animate-spin-slow" />
 
       {/* core avatar */}
-      <div className="absolute inset-[38%] flex items-center justify-center">
-        <div className="glass glow-cyan flex h-full w-full items-center justify-center rounded-full">
-          <span className="text-gradient font-mono text-2xl font-bold">HC</span>
+      <div className="absolute inset-[30%] flex items-center justify-center">
+        <div className="glass glow-cyan relative h-full w-full overflow-hidden rounded-full border border-cyan/40">
+          <img
+            src={happyImg}
+            alt="Happy Chahal"
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
 
@@ -522,21 +516,10 @@ function Education({
 
         {/* Milestone 1 */}
         <TimelineNode side="left" tint="cyan" icon={GraduationCap} label="Current">
-          <h3 className="text-lg font-semibold">Vellore Institute of Technology (VIT Bhopal)</h3>
+          <h3 className="text-lg font-semibold">Vellore Institute of Technology</h3>
           <p className="mt-1.5 text-sm text-foreground/65">
             Bachelor of Technology (BTech) in Computer Science & Engineering.
           </p>
-          <div className="mt-4 glass rounded-xl p-3">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-foreground/55">
-                Semester 1 Target
-              </span>
-              <span className="font-mono text-sm text-emerald">9.0+ CGPA</span>
-            </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/5">
-              <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-cyan to-emerald glow-cyan" />
-            </div>
-          </div>
         </TimelineNode>
 
         {/* Milestone 2 */}
@@ -721,7 +704,7 @@ function Footer() {
     <footer className="relative mt-20 border-t border-white/5 px-4 py-8 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-xs text-foreground/45 sm:flex-row">
         <span className="font-mono">© {new Date().getFullYear()} Happy Chahal — Crafted with care.</span>
-        <span className="font-mono">VIT Bhopal · BTech CSE</span>
+        <span className="font-mono">Vellore Institute of Technology · BTech CSE</span>
       </div>
     </footer>
   );
