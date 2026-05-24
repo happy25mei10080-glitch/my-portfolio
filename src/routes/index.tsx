@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio of Happy Chahal — BTech CSE student at VIT Bhopal building MERN stack applications and mastering DSA in C++.",
+          "Portfolio of Happy Chahal — BTech CSE student at Vellore Institute of Technology building MERN stack applications and mastering DSA in C++.",
       },
       { property: "og:title", content: "Happy Chahal — Portfolio" },
       {
@@ -704,7 +704,7 @@ function Footer() {
     <footer className="relative mt-20 border-t border-white/5 px-4 py-8 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-xs text-foreground/45 sm:flex-row">
         <span className="font-mono">© {new Date().getFullYear()} Happy Chahal — Crafted with care.</span>
-        <span className="font-mono">VIT Bhopal · BTech CSE</span>
+        <span className="font-mono">Vellore Institute of Technology · BTech CSE</span>
       </div>
     </footer>
   );
