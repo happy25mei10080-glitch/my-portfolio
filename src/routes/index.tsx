@@ -194,8 +194,8 @@ function Hero() {
             variants={fadeUp}
             className="mt-6 max-w-xl text-base leading-relaxed text-foreground/65 sm:text-lg"
           >
-            Building scalable web solutions while mastering algorithmic logic. First-year BTech
-            student at Vellore Institute of Technology dedicated to software craftsmanship.
+            Building scalable web solutions while mastering algorithmic logic. Engineering
+            student at Vellore Institute of Technology dedicated to software devlopment.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
