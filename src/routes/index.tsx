@@ -334,7 +334,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto aspect-square w-full max-w-md"
+          className="relative mx-auto aspect-square w-full max-w-[18rem] px-6 sm:max-w-sm sm:px-0 lg:max-w-md"
         >
           <OrbitalGraphic />
         </motion.div>
