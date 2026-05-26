@@ -109,11 +109,13 @@ function TypeOnce({
   className = "",
   delay = 0,
   speed = 55,
+  caretClassName = "bg-current",
 }: {
   text: string;
   className?: string;
   delay?: number;
   speed?: number;
+  caretClassName?: string;
 }) {
   const [shown, setShown] = useState(0);
   const [started, setStarted] = useState(false);
@@ -137,7 +139,7 @@ function TypeOnce({
       {!done && (
         <span
           aria-hidden
-          className="ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] bg-current animate-caret-blink"
+          className={`ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] animate-caret-blink ${caretClassName}`}
         />
       )}
     </span>
