@@ -570,23 +570,72 @@ function FFCSMock() {
   );
 }
 
+const dsaSegments: { t: string; c?: string }[] = [
+  { t: "int", c: "text-violet" },
+  { t: " " },
+  { t: "binarySearch", c: "text-cyan" },
+  { t: "(vector<int>& a, " },
+  { t: "int", c: "text-violet" },
+  { t: " t) {\n  " },
+  { t: "int", c: "text-violet" },
+  { t: " l=0, r=a.size()-1;\n  " },
+  { t: "while", c: "text-violet" },
+  { t: " (l <= r) {\n    " },
+  { t: "int", c: "text-violet" },
+  { t: " m = l + (r-l)/2;\n    " },
+  { t: "if", c: "text-violet" },
+  { t: " (a[m]==t) " },
+  { t: "return", c: "text-violet" },
+  { t: " m;\n    a[m]<t ? l=m+1 : r=m-1;\n  }\n  " },
+  { t: "return", c: "text-violet" },
+  { t: " -1;\n}\n" },
+  { t: "// O(log n) \u2713", c: "text-emerald" },
+];
+
 function DSAMock() {
+  const total = dsaSegments.reduce((n, s) => n + s.t.length, 0);
+  const [shown, setShown] = useState(0);
+
+  useEffect(() => {
+    if (shown >= total) {
+      const restart = setTimeout(() => setShown(0), 4500);
+      return () => clearTimeout(restart);
+    }
+    const t = setTimeout(() => setShown((n) => n + 1), 32);
+    return () => clearTimeout(t);
+  }, [shown, total]);
+
+  let remaining = shown;
+  const parts: React.ReactNode[] = [];
+  for (let i = 0; i < dsaSegments.length; i++) {
+    if (remaining <= 0) break;
+    const seg = dsaSegments[i];
+    const slice = seg.t.slice(0, remaining);
+    remaining -= slice.length;
+    parts.push(
+      seg.c ? (
+        <span key={i} className={seg.c}>
+          {slice}
+        </span>
+      ) : (
+        <span key={i}>{slice}</span>
+      ),
+    );
+  }
+
+  const done = shown >= total;
+
   return (
     <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-violet/15 via-transparent to-cyan/10 p-6 font-mono text-[11px] leading-relaxed">
       <div className="absolute inset-0 grid-pattern opacity-50" />
       <pre className="relative text-foreground/85">
-        <span className="text-violet">int</span>{" "}
-        <span className="text-cyan">binarySearch</span>(vector&lt;int&gt;&amp; a, <span className="text-violet">int</span> t) {"{"}
-        {"\n  "}<span className="text-violet">int</span> l=0, r=a.size()-1;
-        {"\n  "}<span className="text-violet">while</span> (l &lt;= r) {"{"}
-        {"\n    "}<span className="text-violet">int</span> m = l + (r-l)/2;
-        {"\n    "}<span className="text-violet">if</span> (a[m]==t) <span className="text-violet">return</span> m;
-        {"\n    "}a[m]&lt;t ? l=m+1 : r=m-1;
-        {"\n  }"}
-        {"\n  "}<span className="text-violet">return</span> -1;
-        {"\n}"}
-        {"\n"}
-        <span className="text-emerald">// O(log n) ✓</span>
+        {parts}
+        {!done && (
+          <span
+            aria-hidden
+            className="ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] bg-cyan glow-cyan animate-caret-blink"
+          />
+        )}
       </pre>
     </div>
   );
