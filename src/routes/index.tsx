@@ -109,11 +109,13 @@ function TypeOnce({
   className = "",
   delay = 0,
   speed = 55,
+  caretClassName = "bg-current",
 }: {
   text: string;
   className?: string;
   delay?: number;
   speed?: number;
+  caretClassName?: string;
 }) {
   const [shown, setShown] = useState(0);
   const [started, setStarted] = useState(false);
@@ -137,7 +139,7 @@ function TypeOnce({
       {!done && (
         <span
           aria-hidden
-          className="ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] bg-current animate-caret-blink"
+          className={`ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[2px] animate-caret-blink ${caretClassName}`}
         />
       )}
     </span>
@@ -256,8 +258,8 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
 /* ----------------------------- HERO ----------------------------- */
 function Hero() {
   return (
-    <section id="home" className="relative px-4 pt-36 pb-24 sm:px-6 sm:pt-40 lg:pt-44">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+    <section id="home" className="relative px-4 pt-28 pb-20 sm:px-6 sm:pt-40 sm:pb-24 lg:pt-44">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 sm:gap-12 lg:grid-cols-2">
         <motion.div
           initial="hidden"
           animate="show"
@@ -272,9 +274,16 @@ function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+            className="mt-6 text-[2rem] font-bold leading-[1.1] tracking-tight break-words sm:text-5xl lg:text-6xl"
           >
-            Hi, I'm <span className="text-gradient">Happy Chahal</span>.
+            Hi, I'm{" "}
+            <TypeOnce
+              text="Happy Chahal"
+              className="text-gradient"
+              caretClassName="bg-cyan glow-cyan"
+              speed={90}
+            />
+            .
             <br />
             <span className="text-foreground/85">Engineering Student &</span>{" "}
             <span className="text-gradient">
@@ -325,7 +334,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto aspect-square w-full max-w-md"
+          className="relative mx-auto aspect-square w-full max-w-[18rem] px-6 sm:max-w-sm sm:px-0 lg:max-w-md"
         >
           <OrbitalGraphic />
         </motion.div>
@@ -380,7 +389,7 @@ function OrbitalGraphic() {
       </div>
 
       {/* corner code chip */}
-      <div className="absolute -bottom-2 -right-2 glass animate-float rounded-xl p-3 font-mono text-[11px] text-foreground/70">
+      <div className="absolute -bottom-2 right-0 glass animate-float rounded-xl p-2.5 font-mono text-[10px] text-foreground/70 sm:-right-2 sm:p-3 sm:text-[11px]">
         <div className="text-cyan">const dev = {"{"}</div>
         <div className="pl-3">role: <span className="text-emerald">"builder"</span>,</div>
         <div className="pl-3">stack: <span className="text-violet">"MERN"</span></div>
