@@ -258,83 +258,97 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
 /* ----------------------------- HERO ----------------------------- */
 function Hero() {
   return (
-    <section id="home" className="relative px-4 pt-28 pb-20 sm:px-6 sm:pt-40 sm:pb-24 lg:pt-44">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 sm:gap-12 lg:grid-cols-2">
+    <section
+      id="home"
+      className="relative overflow-hidden px-4 pt-28 pb-20 sm:px-6 sm:pt-36 sm:pb-28"
+    >
+      {/* Floating purple square decorations (phodu.club style) */}
+      <span className="phodu-float left-[6%] top-[22%] h-3 w-3 opacity-80" />
+      <span className="phodu-float right-[8%] top-[18%] h-4 w-4 opacity-90" style={{ animationDelay: "1.2s" }} />
+      <span className="phodu-float left-[12%] bottom-[18%] h-2.5 w-2.5 opacity-70" style={{ animationDelay: "2.4s" }} />
+      <span className="phodu-float right-[14%] bottom-[26%] h-3.5 w-3.5 opacity-60" style={{ animationDelay: "0.6s" }} />
+      <span className="phodu-float left-[40%] top-[10%] h-2 w-2 opacity-60" style={{ animationDelay: "1.8s" }} />
+
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center text-center">
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={{ show: { transition: { staggerChildren: 0.12 } } }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <motion.div variants={fadeUp}>
-            <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-emerald glow-emerald">
-              <Sparkles size={14} />
-              <span className="font-mono tracking-wide">Open to Learning & Collaboration</span>
-            </span>
-          </motion.div>
-
-          <motion.h1
-            variants={fadeUp}
-            className="mt-6 text-[2rem] font-bold leading-[1.1] tracking-tight break-words sm:text-5xl lg:text-6xl"
-          >
-            Hi, I'm{" "}
-            <TypeOnce
-              text="Happy Chahal"
-              className="text-gradient"
-              caretClassName="bg-cyan glow-cyan"
-              speed={90}
-            />
-            .
-            <br />
-            <span className="text-foreground/85">Engineering Student &</span>{" "}
-            <span className="text-gradient">
-              <Typewriter
-                words={[
-                  "Full-Stack Developer.",
-                  "MERN Stack Builder.",
-                  "DSA Problem Solver.",
-                  "C++ Enthusiast.",
-                ]}
-              />
-            </span>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            className="mt-6 max-w-xl text-base leading-relaxed text-foreground/65 sm:text-lg"
-          >
-            Building <TypeOnce text="scalable web solutions" className="text-cyan font-medium" /> while
-            mastering <TypeOnce text="algorithmic logic" className="text-violet font-medium" delay={1.2} />.
-            Engineering student at Vellore Institute of Technology dedicated to software development.
-          </motion.p>
-
-
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="https://github.com/happychahal"
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-xl border border-cyan/40 bg-cyan/15 px-5 py-3 text-sm font-medium text-cyan transition-all hover:bg-cyan/25 hover:glow-cyan"
-            >
-              <Github size={16} />
-              View My GitHub
-              <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#contact"
-              className="glass glass-hover inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-foreground/90"
-            >
-              Let's Connect
-            </a>
-          </motion.div>
-
+          <span className="inline-flex items-center gap-2 rounded-full border border-violet/40 bg-violet/10 px-4 py-1.5 text-xs font-medium text-violet">
+            <Sparkles size={14} />
+            <span className="font-mono tracking-wide">Open to Learning & Collaboration</span>
+          </span>
         </motion.div>
 
-        {/* Right: Orbital graphic */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mt-8 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight break-words sm:text-6xl lg:text-7xl"
+        >
+          <span className="text-foreground">#</span>
+          <TypeOnce
+            text="HappyChahal"
+            className="text-gradient"
+            caretClassName="bg-violet glow-violet"
+            speed={90}
+          />
+          <br />
+          <span className="text-foreground/90">Engineering Student &</span>{" "}
+          <span className="text-gradient">
+            <Typewriter
+              words={[
+                "Full-Stack Developer.",
+                "MERN Stack Builder.",
+                "DSA Problem Solver.",
+                "C++ Enthusiast.",
+              ]}
+            />
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="mt-8 max-w-2xl text-base leading-relaxed text-foreground/65 sm:text-lg"
+        >
+          Building <TypeOnce text="scalable web solutions" className="text-violet font-medium" /> while
+          mastering <TypeOnce text="algorithmic logic" className="text-fuchsia-400 font-medium" delay={1.2} />.
+          Engineering student at Vellore Institute of Technology dedicated to software development.
+        </motion.p>
+
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+        >
+          <a
+            href="https://github.com/happychahal"
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 rounded-xl bg-violet px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all hover:bg-violet/90 hover:shadow-[0_0_45px_rgba(139,92,246,0.7)]"
+          >
+            <Github size={16} />
+            View My GitHub
+            <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3 text-sm font-semibold text-black transition-all hover:bg-white/90"
+          >
+            Let's Connect
+          </a>
+        </motion.div>
+
+        {/* Avatar / Orbital below — phodu style hero media */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto aspect-square w-full max-w-[18rem] px-6 sm:max-w-sm sm:px-0 lg:max-w-md"
+          transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto mt-16 aspect-square w-full max-w-[18rem] sm:max-w-sm lg:max-w-md"
         >
           <OrbitalGraphic />
         </motion.div>
@@ -342,6 +356,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function OrbitalGraphic() {
   return (
