@@ -258,8 +258,8 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
 /* ----------------------------- HERO ----------------------------- */
 function Hero() {
   return (
-    <section id="home" className="relative px-4 pt-36 pb-24 sm:px-6 sm:pt-40 lg:pt-44">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+    <section id="home" className="relative px-4 pt-28 pb-20 sm:px-6 sm:pt-40 sm:pb-24 lg:pt-44">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 sm:gap-12 lg:grid-cols-2">
         <motion.div
           initial="hidden"
           animate="show"
@@ -274,9 +274,16 @@ function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+            className="mt-6 text-[2rem] font-bold leading-[1.1] tracking-tight break-words sm:text-5xl lg:text-6xl"
           >
-            Hi, I'm <span className="text-gradient">Happy Chahal</span>.
+            Hi, I'm{" "}
+            <TypeOnce
+              text="Happy Chahal"
+              className="text-gradient"
+              caretClassName="bg-cyan glow-cyan"
+              speed={90}
+            />
+            .
             <br />
             <span className="text-foreground/85">Engineering Student &</span>{" "}
             <span className="text-gradient">
