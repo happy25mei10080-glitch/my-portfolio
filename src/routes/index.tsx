@@ -392,7 +392,7 @@ function OrbitalGraphic() {
       <div className="absolute -bottom-2 right-0 glass animate-float rounded-xl p-2.5 font-mono text-[10px] text-foreground/70 sm:-right-2 sm:p-3 sm:text-[11px]">
         <div className="text-cyan">const dev = {"{"}</div>
         <div className="pl-3">role: <span className="text-emerald">"builder"</span>,</div>
-        <div className="pl-3">stack: <span className="text-violet">"MERN"</span></div>
+        <div className="pl-3">stack: <span className="text-violet">"<TypeOnce text="MERN" className="text-violet" speed={180} delay={1.6} />"</span></div>
         <div className="text-cyan">{"}"}</div>
       </div>
     </div>
