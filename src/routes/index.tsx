@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import happyImg from "@/assets/happy-chahal.png";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSiteContent, useProjects } from "@/lib/content";
 import {
   Github,
   Linkedin,
@@ -21,6 +22,7 @@ import {
   ExternalLink,
   CheckCircle2,
   Circle,
+  Lock,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
