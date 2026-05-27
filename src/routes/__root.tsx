@@ -7,6 +7,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "sonner";
+import { FloatingDots } from "@/components/FloatingDots";
 
 import appCss from "../styles.css?url";
 
@@ -113,7 +115,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <FloatingDots />
+      <div className="relative z-10">
+        <Outlet />
+      </div>
+      <Toaster theme="dark" position="top-right" richColors />
     </QueryClientProvider>
   );
 }
