@@ -153,8 +153,9 @@ function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [checks, setChecks] = useState<Record<string, boolean>>({});
+  const content = useSiteContent();
 
-  const email = "happyprince38699@gmail.com";
+  const email = content.contact_email;
 
   const copyEmail = async () => {
     try {
@@ -212,12 +213,13 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-2 text-xs font-medium text-cyan transition-all hover:bg-cyan/20 hover:glow-cyan md:inline-flex"
+        <Link
+          to="/admin/login"
+          className="hidden rounded-lg border border-violet/40 bg-violet/10 px-4 py-2 text-xs font-medium text-violet transition-all hover:bg-violet/20 md:inline-flex items-center gap-1.5"
+          aria-label="Admin login"
         >
-          Let's Connect
-        </a>
+          <Lock size={12} /> Admin
+        </Link>
 
         <button
           aria-label="Toggle menu"
@@ -496,82 +498,83 @@ function Skills() {
 
 /* ----------------------------- PROJECTS ----------------------------- */
 function Projects() {
-  const projects = [
-    {
-      title: "VIT FFCS Planner & Schedule Builder",
-      desc: "A modern web application built to help VIT university students model, optimize, and plan their academic schedules under the Fully Flexible Credit System. Designed with rich glassmorphism UI layouts and interactive course selectors.",
-      stack: ["React.js", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/happychahal",
-      live: "#",
-      tint: "cyan" as const,
-      mock: <FFCSMock />,
-    },
-    {
-      title: "DSA Problem-Solving Repository & Logic Engine",
-      desc: "A structured, self-curated archive tracking array manipulations, binary searches, and advanced data structures implemented natively in C++. Showcases computational efficiency metrics and complexity analyses.",
-      stack: ["C++", "Git", "Markdown Architecture"],
-      github: "https://github.com/happychahal",
-      live: null,
-      tint: "violet" as const,
-      mock: <DSAMock />,
-    },
-  ];
+  const { data: projects, isLoading } = useProjects();
+
+  const fallbackMock = (tint: string) =>
+    tint === "violet" ? <DSAMock /> : <FFCSMock />;
 
   return (
     <Section id="projects" eyebrow="03 — Building" title="Projects In Progress">
-      <div className="grid gap-6 lg:grid-cols-2">
-        {projects.map((p, i) => (
-          <motion.article
-            key={p.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="glass glass-hover group flex flex-col overflow-hidden rounded-2xl"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10">
-              {p.mock}
-            </div>
-            <div className="flex flex-1 flex-col p-6">
-              <div className="flex flex-wrap gap-1.5">
-                {p.stack.map((t) => (
-                  <span
-                    key={t}
-                    className={`rounded-md border border-${p.tint}/30 bg-${p.tint}/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-${p.tint}`}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <h3 className="mt-4 text-xl font-semibold tracking-tight">{p.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/65">{p.desc}</p>
+      {isLoading ? (
+        <p className="text-sm text-foreground/55">Loading projects…</p>
+      ) : !projects?.length ? (
+        <p className="text-sm text-foreground/55">No projects yet.</p>
+      ) : (
+        <div className="grid gap-6 lg:grid-cols-2">
+          {projects.map((p, i) => {
+            const tint = (p.tint || "cyan") as "cyan" | "violet" | "emerald";
+            return (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="glass glass-hover group flex flex-col overflow-hidden rounded-2xl"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10">
+                  {p.image_url ? (
+                    <img src={p.image_url} alt={p.title} className="h-full w-full object-cover" />
+                  ) : (
+                    fallbackMock(tint)
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tech.map((t) => (
+                      <span
+                        key={t}
+                        className={`rounded-md border border-${tint}/30 bg-${tint}/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-${tint}`}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold tracking-tight">{p.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/65">
+                    {p.description}
+                  </p>
 
-              <div className="mt-6 flex items-center gap-2">
-                <a
-                  href={p.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-foreground/85 transition-colors hover:border-cyan/40 hover:text-cyan"
-                >
-                  <Github size={14} />
-                  Repository
-                </a>
-                {p.live && (
-                  <a
-                    href={p.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-cyan/40 bg-cyan/10 px-3 py-2 text-xs text-cyan transition-colors hover:bg-cyan/20"
-                  >
-                    <ExternalLink size={14} />
-                    Live Preview
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.article>
-        ))}
-      </div>
+                  <div className="mt-6 flex items-center gap-2">
+                    {p.github_url && (
+                      <a
+                        href={p.github_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-foreground/85 transition-colors hover:border-cyan/40 hover:text-cyan"
+                      >
+                        <Github size={14} />
+                        Repository
+                      </a>
+                    )}
+                    {p.live_url && (
+                      <a
+                        href={p.live_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg border border-cyan/40 bg-cyan/10 px-3 py-2 text-xs text-cyan transition-colors hover:bg-cyan/20"
+                      >
+                        <ExternalLink size={14} />
+                        Live Preview
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      )}
     </Section>
   );
 }
