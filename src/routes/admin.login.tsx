@@ -20,7 +20,7 @@ function AdminLoginPage() {
   const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
-  const [busy, setBusy] = useState(false);
+
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
