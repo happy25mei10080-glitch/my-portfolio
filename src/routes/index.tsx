@@ -253,6 +253,14 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
                 </li>
               ))}
             </ul>
+            <Link
+              to="/admin/login"
+              onClick={() => setMenuOpen(false)}
+              className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-violet/40 bg-violet/10 px-3 py-3 text-sm font-medium text-violet hover:bg-violet/20"
+            >
+              <Lock size={14} /> Admin Login
+            </Link>
+
           </motion.div>
         )}
       </AnimatePresence>
