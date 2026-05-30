@@ -38,15 +38,6 @@ function AdminLoginPage() {
     }
     setBusy(true);
     try {
-      if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
-          email: email.trim(),
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-        toast.success("Account created — signing in…");
-      }
       const { error } = await supabase.auth.signInWithPassword({
         email: email.trim(),
         password,
@@ -56,15 +47,12 @@ function AdminLoginPage() {
       navigate({ to: "/admin" });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Authentication failed";
-      if (mode === "signin" && /invalid|credentials/i.test(msg)) {
-        toast.error("Wrong password — or no account yet. Try 'Create account'.");
-      } else {
-        toast.error(msg);
-      }
+      toast.error(msg);
     } finally {
       setBusy(false);
     }
   };
+
 
   return (
     <div className="relative min-h-screen flex items-center justify-center px-4 py-20">
