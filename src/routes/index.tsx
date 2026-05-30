@@ -215,11 +215,12 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
 
         <Link
           to="/admin/login"
-          className="hidden rounded-lg border border-violet/40 bg-violet/10 px-4 py-2 text-xs font-medium text-violet transition-all hover:bg-violet/20 md:inline-flex items-center gap-1.5"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-violet/40 bg-violet/10 px-3 py-2 text-xs font-medium text-violet transition-all hover:bg-violet/20 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]"
           aria-label="Admin login"
         >
           <Lock size={12} /> Admin
         </Link>
+
 
         <button
           aria-label="Toggle menu"
@@ -252,6 +253,14 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
                 </li>
               ))}
             </ul>
+            <Link
+              to="/admin/login"
+              onClick={() => setMenuOpen(false)}
+              className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-violet/40 bg-violet/10 px-3 py-3 text-sm font-medium text-violet hover:bg-violet/20"
+            >
+              <Lock size={14} /> Admin Login
+            </Link>
+
           </motion.div>
         )}
       </AnimatePresence>
