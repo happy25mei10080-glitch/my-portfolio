@@ -19,7 +19,7 @@ function AdminLoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [busy_, _setBusy] = useState(false);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
