@@ -108,18 +108,9 @@ function AdminLoginPage() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all hover:bg-violet/90 disabled:opacity-50"
           >
             <LogIn size={16} />
-            {busy ? "Working…" : mode === "signup" ? "Create account & sign in" : "Sign in"}
+            {busy ? "Working…" : "Sign in"}
           </button>
 
-          <button
-            type="button"
-            onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            className="block w-full text-center text-xs text-foreground/60 hover:text-foreground transition-colors"
-          >
-            {mode === "signin"
-              ? "First time? Create your admin account →"
-              : "← Already have an account? Sign in"}
-          </button>
         </form>
       </div>
     </div>
