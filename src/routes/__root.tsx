@@ -74,14 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Happy portfolio website" },
+      { name: "description", content: "A modern, responsive personal portfolio website showcasing an engineering student's skills, projects, and academic journey with a unique glassmorphism aesthetic" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Happy portfolio website" },
+      { property: "og:description", content: "A modern, responsive personal portfolio website showcasing an engineering student's skills, projects, and academic journey with a unique glassmorphism aesthetic" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Happy portfolio website" },
+      { name: "twitter:description", content: "A modern, responsive personal portfolio website showcasing an engineering student's skills, projects, and academic journey with a unique glassmorphism aesthetic" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/59c051de-0395-4d85-a322-bac2d65b68a9/id-preview-8995495d--448c0178-2453-48a9-852b-a71b33c2ba74.lovable.app-1780139071579.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/59c051de-0395-4d85-a322-bac2d65b68a9/id-preview-8995495d--448c0178-2453-48a9-852b-a71b33c2ba74.lovable.app-1780139071579.png" },
     ],
     links: [
       {
