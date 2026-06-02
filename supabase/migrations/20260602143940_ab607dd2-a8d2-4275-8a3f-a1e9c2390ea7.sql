@@ -1,0 +1,1 @@
+UPDATE public.site_content SET value = 'https://github.com/happy25mei10080-glitch' WHERE key = 'github_url';
