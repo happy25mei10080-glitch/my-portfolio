@@ -10,7 +10,7 @@ export const DEFAULT_CONTENT: SiteContentMap = {
   hero_description:
     "Building scalable web solutions while mastering algorithmic logic. Engineering student at Vellore Institute of Technology dedicated to software development.",
   contact_email: "happyprince38699@gmail.com",
-  github_url: "https://github.com/happychahal",
+  github_url: "https://github.com/happy25mei10080-glitch",
   linkedin_url: "https://www.linkedin.com/in/happy-chahal-553695380/",
   youtube_url: "https://youtube.com/@happychahal",
   footer_tagline: "Crafted with care.",
