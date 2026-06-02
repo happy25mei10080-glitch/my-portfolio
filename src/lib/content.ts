@@ -11,7 +11,7 @@ export const DEFAULT_CONTENT: SiteContentMap = {
     "Building scalable web solutions while mastering algorithmic logic. Engineering student at Vellore Institute of Technology dedicated to software development.",
   contact_email: "happyprince38699@gmail.com",
   github_url: "https://github.com/happychahal",
-  linkedin_url: "https://linkedin.com/in/happychahal",
+  linkedin_url: "https://www.linkedin.com/in/happy-chahal-553695380/",
   youtube_url: "https://youtube.com/@happychahal",
   footer_tagline: "Crafted with care.",
   education_title: "Vellore Institute of Technology",
