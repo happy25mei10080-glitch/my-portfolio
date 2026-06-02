@@ -1,0 +1,1 @@
+UPDATE public.site_content SET value = 'https://www.linkedin.com/in/happy-chahal-553695380/' WHERE key = 'linkedin_url';
