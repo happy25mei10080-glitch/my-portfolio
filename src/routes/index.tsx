@@ -798,11 +798,12 @@ function Contact({
   copied: boolean;
   copyEmail: () => void;
 }) {
+  const content = useSiteContent();
   const socials = [
-    { href: "https://github.com/happychahal", icon: Github, label: "GitHub", tint: "cyan" },
-    { href: "https://linkedin.com/in/happychahal", icon: Linkedin, label: "LinkedIn", tint: "violet" },
-    { href: "https://youtube.com/@happychahal", icon: Youtube, label: "YouTube", tint: "emerald" },
-  ] as const;
+    { href: content.github_url, icon: Github, label: "GitHub", tint: "cyan" as const },
+    { href: content.linkedin_url, icon: Linkedin, label: "LinkedIn", tint: "violet" as const },
+    { href: content.youtube_url, icon: Youtube, label: "YouTube", tint: "emerald" as const },
+  ];
 
   return (
     <Section id="contact" eyebrow="05 — Reach out" title="Let's Build Something">
