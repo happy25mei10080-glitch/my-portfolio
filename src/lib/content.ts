@@ -60,4 +60,53 @@ export function useProjects() {
   });
 }
 
+export type Skill = {
+  id: string;
+  category: string;
+  tint: string;
+  icon: string;
+  group_label: string;
+  name: string;
+  sort_order: number;
+};
+
+export function useSkills() {
+  return useQuery({
+    queryKey: ["skills"],
+    queryFn: async (): Promise<Skill[]> => {
+      const { data, error } = await supabase
+        .from("skills")
+        .select("*")
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as Skill[];
+    },
+    staleTime: 10_000,
+  });
+}
+
+export const PROJECT_IMAGES_BUCKET = "project-images";
+
+/** Resolve a stored image_url to a usable src.
+ *  - http(s) URL → returned as-is
+ *  - otherwise → treated as a storage path in the project-images bucket and signed (1 year) */
+export async function resolveProjectImageUrl(value: string | null): Promise<string | null> {
+  if (!value) return null;
+  if (/^https?:\/\//i.test(value)) return value;
+  const { data } = await supabase.storage
+    .from(PROJECT_IMAGES_BUCKET)
+    .createSignedUrl(value, 60 * 60 * 24 * 365);
+  return data?.signedUrl ?? null;
+}
+
+export function useResolvedProjectImage(value: string | null) {
+  return useQuery({
+    queryKey: ["project_image", value],
+    queryFn: () => resolveProjectImageUrl(value),
+    enabled: !!value,
+    staleTime: 1000 * 60 * 60,
+  });
+}
+
 export const ADMIN_EMAIL = "happyprince38699@gmail.com";
+

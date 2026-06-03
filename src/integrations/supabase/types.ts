@@ -74,6 +74,42 @@ export type Database = {
         }
         Relationships: []
       }
+      skills: {
+        Row: {
+          category: string
+          created_at: string
+          group_label: string
+          icon: string
+          id: string
+          name: string
+          sort_order: number
+          tint: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          group_label: string
+          icon?: string
+          id?: string
+          name: string
+          sort_order?: number
+          tint?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          group_label?: string
+          icon?: string
+          id?: string
+          name?: string
+          sort_order?: number
+          tint?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
