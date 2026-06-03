@@ -560,12 +560,9 @@ function Projects() {
                 className="glass glass-hover group flex flex-col overflow-hidden rounded-2xl"
               >
                 <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10">
-                  {p.image_url ? (
-                    <img src={p.image_url} alt={p.title} className="h-full w-full object-cover" />
-                  ) : (
-                    fallbackMock(tint)
-                  )}
+                  <ProjectImage project={p} fallback={fallbackMock(tint)} />
                 </div>
+
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex flex-wrap gap-1.5">
                     {p.tech.map((t) => (
