@@ -344,13 +344,13 @@ function ProjectsManager() {
                 className="input"
               />
             </Field>
-            <Field label="Image URL (optional)">
-              <input
+            <Field label="Project image (upload or URL)" full>
+              <ProjectImageInput
                 value={editing.image_url ?? ""}
-                onChange={(e) => setEditing({ ...editing, image_url: e.target.value })}
-                className="input"
+                onChange={(v) => setEditing({ ...editing, image_url: v })}
               />
             </Field>
+
             <Field label="Sort order">
               <input
                 type="number"
