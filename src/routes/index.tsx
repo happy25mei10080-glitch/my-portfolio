@@ -428,82 +428,110 @@ function OrbitalGraphic() {
 }
 
 /* ----------------------------- SKILLS ----------------------------- */
+const SKILL_ICONS: Record<string, typeof Code2> = {
+  Code2,
+  Database,
+  Terminal,
+  Sparkles,
+};
+
 function Skills() {
-  const cats = [
-    {
-      icon: Code2,
-      tint: "cyan",
-      title: "Languages & Fundamentals",
-      groups: [
-        { label: "Core Language", items: ["C++", "Object-Oriented Programming", "Memory Optimization"] },
-        { label: "Core DSA", items: ["Linear & Non-Linear Structures", "Searching", "Sorting Algorithms"] },
-      ],
-    },
-    {
-      icon: Database,
-      tint: "violet",
-      title: "MERN Stack Development",
-      groups: [
-        { label: "Frontend", items: ["React.js", "Next.js", "HTML5/CSS3", "JavaScript (ES6+)", "Tailwind CSS"] },
-        { label: "Backend", items: ["Node.js", "Express.js"] },
-        { label: "Database", items: ["MongoDB"] },
-      ],
-    },
-    {
-      icon: Terminal,
-      tint: "emerald",
-      title: "Developer Utilities",
-      groups: [
-        { label: "Version Control", items: ["Git", "GitHub"] },
-        { label: "Environments", items: ["VS Code", "Linux Terminal Shell"] },
-      ],
-    },
-  ] as const;
+  const { data: skills, isLoading } = useSkills();
+
+  // Group by category preserving first-seen order based on sort_order
+  const cats = (() => {
+    const order: string[] = [];
+    const map = new Map<
+      string,
+      { title: string; tint: string; icon: string; groups: Map<string, string[]> }
+    >();
+    for (const s of skills ?? []) {
+      if (!map.has(s.category)) {
+        order.push(s.category);
+        map.set(s.category, {
+          title: s.category,
+          tint: s.tint,
+          icon: s.icon,
+          groups: new Map(),
+        });
+      }
+      const cat = map.get(s.category)!;
+      if (!cat.groups.has(s.group_label)) cat.groups.set(s.group_label, []);
+      cat.groups.get(s.group_label)!.push(s.name);
+    }
+    return order.map((k) => {
+      const c = map.get(k)!;
+      return {
+        title: c.title,
+        tint: c.tint,
+        Icon: SKILL_ICONS[c.icon] ?? Code2,
+        groups: Array.from(c.groups.entries()).map(([label, items]) => ({ label, items })),
+      };
+    });
+  })();
 
   return (
     <Section id="skills" eyebrow="02 — Toolkit" title="Skills & Tech Stack">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {cats.map((c, i) => (
-          <motion.div
-            key={c.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="glass glass-hover group rounded-2xl p-6"
-          >
-            <div
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-${c.tint}/15 border border-${c.tint}/30 text-${c.tint}`}
+      {isLoading ? (
+        <p className="text-sm text-foreground/55">Loading skills…</p>
+      ) : !cats.length ? (
+        <p className="text-sm text-foreground/55">No skills added yet.</p>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {cats.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="glass glass-hover group rounded-2xl p-6"
             >
-              <c.icon size={20} />
-            </div>
-            <h3 className="mt-5 text-lg font-semibold tracking-tight">{c.title}</h3>
+              <div
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-${c.tint}/15 border border-${c.tint}/30 text-${c.tint}`}
+              >
+                <c.Icon size={20} />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight">{c.title}</h3>
 
-            <div className="mt-5 space-y-4">
-              {c.groups.map((g) => (
-                <div key={g.label}>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-                    {g.label}
+              <div className="mt-5 space-y-4">
+                {c.groups.map((g) => (
+                  <div key={g.label}>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
+                      {g.label}
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {g.items.map((it) => (
+                        <span
+                          key={it}
+                          className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-foreground/80"
+                        >
+                          {it}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {g.items.map((it) => (
-                      <span
-                        key={it}
-                        className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-foreground/80"
-                      >
-                        {it}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </Section>
   );
 }
+
+function ProjectImage({ project, fallback }: { project: Project; fallback: React.ReactNode }) {
+  const { data: src } = useResolvedProjectImage(project.image_url);
+  if (project.image_url && src) {
+    return <img src={src} alt={project.title} className="h-full w-full object-cover" />;
+  }
+  if (project.image_url && !src) {
+    return <div className="h-full w-full bg-white/[0.03]" />;
+  }
+  return <>{fallback}</>;
+}
+
 
 /* ----------------------------- PROJECTS ----------------------------- */
 function Projects() {
