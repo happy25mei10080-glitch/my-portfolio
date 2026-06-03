@@ -87,6 +87,8 @@ function AdminDashboard() {
         <SiteContentEditor />
         <SkillsManager />
         <ProjectsManager />
+        <style>{`.input{width:100%;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);padding:0.5rem 0.75rem;font-size:0.875rem;color:rgb(245 245 245 / 0.9);outline:none}.input:focus{border-color:rgba(139,92,246,0.6)}`}</style>
+
 
       </div>
     </div>
