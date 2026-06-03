@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { ADMIN_EMAIL, DEFAULT_CONTENT, type Project } from "@/lib/content";
+import { ADMIN_EMAIL, DEFAULT_CONTENT, PROJECT_IMAGES_BUCKET, type Project, type Skill } from "@/lib/content";
 import { toast } from "sonner";
-import { LogOut, Plus, Save, Trash2, Pencil, X, Eye, ShieldCheck } from "lucide-react";
+import { LogOut, Plus, Save, Trash2, Pencil, X, Eye, ShieldCheck, Upload } from "lucide-react";
+
 
 export const Route = createFileRoute("/admin/")({
   head: () => ({
