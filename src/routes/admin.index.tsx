@@ -85,7 +85,9 @@ function AdminDashboard() {
         </header>
 
         <SiteContentEditor />
+        <SkillsManager />
         <ProjectsManager />
+
       </div>
     </div>
   );
